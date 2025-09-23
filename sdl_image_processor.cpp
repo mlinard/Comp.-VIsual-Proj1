@@ -167,18 +167,18 @@ int main(int argc, char** argv) {
     std::vector<int> hist(256);
     computeHistogram(gray, imgW, imgH, hist);
 
+    //  BLOCO DE CENTRALIZAÇÃO (AGORA CORRIGIDO E ÚNICO)
     SDL_Rect displayBounds;
     SDL_GetDisplayUsableBounds(0, &displayBounds);
 
     int mainX = displayBounds.x + (displayBounds.w - imgW - SIDEBAR_W - GAP) / 2;
     int mainY = displayBounds.y + (displayBounds.h - std::max(imgH, SIDEBAR_H)) / 2;
     if (mainY < displayBounds.y) { mainY = displayBounds.y; }
-
     
     SDL_Window* winMain = SDL_CreateWindow("Visualizador - Imagem", imgW, imgH, 0);
-    SDL_SetWindowPosition(winMain, mainX, mainY);
-
     SDL_Window* winSide = SDL_CreateWindow("Histograma e Controles", SIDEBAR_W, SIDEBAR_H, 0);
+
+    SDL_SetWindowPosition(winMain, mainX, mainY);
     SDL_SetWindowPosition(winSide, mainX + imgW + GAP, mainY);
     
     SDL_Renderer* renMain = SDL_CreateRenderer(winMain, NULL);
