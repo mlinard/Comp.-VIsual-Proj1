@@ -91,7 +91,7 @@ void renderHistogram(SDL_Renderer* renderer, const std::vector<int>& hist) {
     SDL_GetCurrentRenderOutputSize(renderer, &w, &h);
     float margin = 10.0f;
     float gx = margin, gy = margin;
-    float gw = w - 2*margin, gh = h - 110.0f;
+    float gw = w - 2*margin, gh = h - 145.0f; 
 
     int maxv = 1;
     for (int v : hist) if (v > maxv) maxv = v;
@@ -172,6 +172,8 @@ int main(int argc, char** argv) {
 
     int mainX = displayBounds.x + (displayBounds.w - imgW - SIDEBAR_W - GAP) / 2;
     int mainY = displayBounds.y + (displayBounds.h - std::max(imgH, SIDEBAR_H)) / 2;
+    if (mainY < displayBounds.y) { mainY = displayBounds.y; }
+
     
     SDL_Window* winMain = SDL_CreateWindow("Visualizador - Imagem", imgW, imgH, 0);
     SDL_SetWindowPosition(winMain, mainX, mainY);
